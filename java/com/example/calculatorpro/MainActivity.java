@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        // 获取显示历史记录的按钮
+        // Get the button to display the history record
         Button historyButton = findViewById(R.id.historyButton);
 
-        // 为按钮添加点击事件监听器
+        // Add a click event listener to the button
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 在点击按钮时显示历史记录
+                // Display the history when clicking the button
                 showCalculationHistory(historyTextView);
                 //openHistoryActivity((ArrayList<String>) calculationHistory);
             }
@@ -74,22 +74,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void showCalculationHistory(TextView historyTextView) {
         loadCalculationHistoryFromDatabase(historyTextView);
-        // 在这里加载历史记录，或者直接使用已加载的历史记录
-        // 你可以添加逻辑来弹出对话框、新的活动或其他方式来显示历史记录
-        // 这里只是简单地在 TextView 中显示历史记录
+        // Load the history here, or use the loaded history directly
+        // You can add logic to pop up dialogs, new activities or other ways to display history.
+        //Here is simply to display the history in TextView
     }
 
     public void openHistoryActivity(ArrayList<String> cH) {
-        // 创建一个 Intent，指定要打开的新的 Activity
+        // Create an intent that specifies the new activity to open
         Intent intent = new Intent(this, HistoryActivity.class);
 
-        // 获取历史数据，假设你有一个名为 historyList 的 List
+        // Get historical data, assuming you have a List called historyList
         ArrayList<String> historyList = cH;
 
-        // 将历史数据作为额外信息传递给新的 Activity
+        // Passing historical data to a new activity as additional information
         intent.putStringArrayListExtra("historyData", historyList);
 
-        // 启动新的 Activity
+        // Start a new Activity
         startActivity(intent);
     }
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] columns = {DatabaseHelper.COLUMN_CALCULATION};
-        String orderBy = DatabaseHelper.COLUMN_ID + " DESC"; // 按最新的排序
+        String orderBy = DatabaseHelper.COLUMN_ID + " DESC"; // According to the latest sort
 
         Cursor cursor = db.query(DatabaseHelper.TABLE_HISTORY, columns, null, null, null, null, orderBy);
 
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         int count = 0;
         while (cursor.moveToNext() && count < 10) {
             @SuppressLint("Range") String calculation = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_CALCULATION));
-            // 将历史记录添加到历史记录视图或适配器中
+            // Add history to history view or adapter.
             CH.add(calculation);
             historyTextView.append(calculation + " | ");
             count++;

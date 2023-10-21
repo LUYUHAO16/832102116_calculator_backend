@@ -30,13 +30,13 @@ public class HistoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra("historyData")) {
-            // 获取传递的历史数据
+            // Obtain the transmitted historical data
             ArrayList<String> historyList = getIntent().getStringArrayListExtra("historyData");
 
-            // 在布局中找到用于显示历史数据的视图，例如 TextView 或 RecyclerView
+            // Find a view in the layout to display historical data, such as TextView or RecyclerView
             TextView historyTextView = findViewById(R.id.HAView);
 
-            // 将历史数据设置给 TextView
+            // Set historical data to TextView
             if (historyList != null) {
                 StringBuilder historyText = new StringBuilder();
                 for (String historyItem : historyList) {
